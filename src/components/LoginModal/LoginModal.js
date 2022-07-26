@@ -10,6 +10,12 @@ import { getIcxBalance } from "./utils/lib";
 import "@fontsource/lato";
 import styles from "./LoginModal.module.css";
 
+// import images
+import cancelImg from "./cancel-logo.svg";
+import hanaImg from "./hana-logo.jpg";
+import iconImg from "./icon-logo.png";
+import ledgerImg from "./ledger-logo.png";
+
 // variables
 //
 const IMG_HEIGHT = 48;
@@ -19,7 +25,7 @@ const IMG_WIDTH = IMG_HEIGHT;
 // const MOCK_DATA = mockData();
 
 // for accesibility purposes
-Modal.setAppElement("#__next");
+Modal.setAppElement("body");
 
 const customStyles = {
   content: {
@@ -218,10 +224,14 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
           localLoginData.successfulLogin = true;
           break;
 
+        case "CANCEL":
+          console.log("ICONex/Hana wallet selection window closed by user");
+          break;
+
         default:
           console.error("Error on ICONEX_RELAY_RESPONSE");
           console.error("type: " + type);
-          console.error("payload: " + JSON.stringify(payload));
+          console.error("payload: ", payload);
       }
 
       // send data to parent component
@@ -230,11 +240,22 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
       // close LoginModal
       closeModal();
     }
+    // create event listener for Hana and ICONex wallets
     window.addEventListener(
       "ICONEX_RELAY_RESPONSE",
       iconexRelayResponseEventHandler
     );
-  });
+
+    // return the following function to perform cleanup of the event listener
+    // on component unmount
+    return function removeCustomEventListener() {
+      window.removeEventListener(
+        "ICONEX_RELAY_RESPONSE",
+        iconexRelayResponseEventHandler
+      );
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Modal
@@ -255,10 +276,10 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
             </div>
             <div className={styles.bodySectionItem}>
               <span className={styles.bodySectionItemImg}>
-                <img alt="" src="/images/icon-logo.png" />
+                <img alt="" src={iconImg} />
               </span>
               <span className={styles.bodySectionItemImg}>
-                <img alt="" src="/images/hana-logo.jpg" />
+                <img alt="" src={hanaImg} />
               </span>
             </div>
           </div>
@@ -269,7 +290,7 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
             </div>
             <div className={styles.bodySectionItem}>
               <span className={styles.bodySectionItemImg}>
-                <img alt="" src="/images/ledger-logo.png" />
+                <img alt="" src={ledgerImg} />
               </span>
             </div>
           </div>
@@ -287,7 +308,7 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
           <div className={styles.ledger}>
             <div className={styles.ledgerSection}>
               <img
-                src="/images/icon-logo.png"
+                src={iconImg}
                 className={styles.ledgerLogo}
                 alt="icon logo"
               />
@@ -338,7 +359,7 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
           <div className={styles.ledger}>
             <div className={styles.ledgerSection}>
               <img
-                src="/images/cancel-logo.png"
+                src={cancelImg}
                 className={styles.ledgerLogo}
                 alt="icon logo"
               />

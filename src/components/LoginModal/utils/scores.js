@@ -56,4 +56,4 @@ const SCORES = {
   apiHostnames
 };
 
-module.exports = SCORES;
+export default SCORES;

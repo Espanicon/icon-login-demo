@@ -3,9 +3,9 @@
 // to interact with the ICON Blockchain
 //
 // Imports
-const https = require("https");
-const http = require("http");
-const SCORES = require("./scores");
+import https from "https-browserify";
+import http from "stream-http";
+import SCORES from "./scores";
 
 /**
  * async https/http request wrapped in a promise
@@ -86,7 +86,7 @@ async function httpx(params, data = false, runSecured = true) {
   }
 }
 
-async function customRequest(
+export default async function customRequest(
   path,
   data = false,
   hostname = SCORES.apiHostnames.espanicon,
@@ -127,5 +127,3 @@ async function customRequest(
     return null;
   }
 }
-
-module.exports = customRequest;
