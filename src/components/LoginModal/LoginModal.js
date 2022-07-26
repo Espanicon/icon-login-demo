@@ -2,24 +2,24 @@
 //
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
-import Icx from "./utils/hw-app-icx/Icx.js";
+import Icx from "./utils/hw-app-icx/Icx2.js";
 import TransportWebHID from "@ledgerhq/hw-transport-webhid";
 import { v4 as uuidv4 } from "uuid";
-import { getIcxBalance } from "../../utils/IconService.js";
+import { getIcxBalance } from "./utils/lib";
 
 import "@fontsource/lato";
-import IconLogo from "./icon-logo.png";
-import HanaLogo from "./hana-logo.jpg";
-import LedgerLogo from "./ledger-logo.png";
-import CancelLogo from "../../cancel-logo.svg";
-import "./LoginModal.css";
+import styles from "./LoginModal.module.css";
 
+// variables
+//
+const IMG_HEIGHT = 48;
+const IMG_WIDTH = IMG_HEIGHT;
 // testing data
 // import mockData from "../../../local_dev_files/mockData.js";
 // const MOCK_DATA = mockData();
 
 // for accesibility purposes
-Modal.setAppElement("#root");
+Modal.setAppElement("#__next");
 
 const customStyles = {
   content: {
@@ -244,37 +244,37 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
       style={customStyles}
       contentLabel="Login with ICON"
     >
-      <div className="LoginModal-main">
-        <div className="LoginModal-title">
+      <div className={styles.main}>
+        <div className={styles.title}>
           <h2>Login with ICON</h2>
         </div>
-        <div className="LoginModal-body">
-          <div className="LoginModal-body-section" onClick={handleIconLogin}>
-            <div className="LoginModal-body-section-item">
+        <div className={styles.body}>
+          <div className={styles.bodySection} onClick={handleIconLogin}>
+            <div className={styles.bodySectionItem}>
               <p>Login using ICONex | Hana wallet</p>
             </div>
-            <div className="LoginModal-body-section-item">
-              <span className="LoginModal-body-section-item-img">
-                <img alt="" src={IconLogo} />
+            <div className={styles.bodySectionItem}>
+              <span className={styles.bodySectionItemImg}>
+                <img alt="" src="/images/icon-logo.png" />
               </span>
-              <span className="LoginModal-body-section-item-img">
-                <img alt="" src={HanaLogo} />
+              <span className={styles.bodySectionItemImg}>
+                <img alt="" src="/images/hana-logo.jpg" />
               </span>
             </div>
           </div>
           <hr />
-          <div className="LoginModal-body-section" onClick={handleLedgerLogin}>
-            <div className="LoginModal-body-section-item">
+          <div className={styles.bodySection} onClick={handleLedgerLogin}>
+            <div className={styles.bodySectionItem}>
               <p>Login using Ledger</p>
             </div>
-            <div className="LoginModal-body-section-item">
-              <span className="LoginModal-body-section-item-img">
-                <img alt="" src={LedgerLogo} />
+            <div className={styles.bodySectionItem}>
+              <span className={styles.bodySectionItemImg}>
+                <img alt="" src="/images/ledger-logo.png" />
               </span>
             </div>
           </div>
         </div>
-        <div className="LoginModal-footer"></div>
+        <div className={styles.footer}></div>
       </div>
       {/* <button onClick={closeModal}>Close</button> */}
       <Modal
@@ -284,39 +284,39 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
       >
         {" "}
         {ledgerModalIsWaiting ? (
-          <div className="loginModal-ledgerModal">
-            <div className="loginModal-ledgerModal-section">
+          <div className={styles.ledger}>
+            <div className={styles.ledgerSection}>
               <img
-                src={IconLogo}
-                className="loginModal-ledgerModal-logo"
+                src="/images/icon-logo.png"
+                className={styles.ledgerLogo}
                 alt="icon logo"
               />
               <p>Connecting to ledger...</p>
             </div>
           </div>
         ) : ledgerDidConnect ? (
-          <div className="loginModal-ledgerModal">
-            <div className="loginModal-ledgerModal-section">
-              <div className="loginModal-ledgerModal-section-wallet">
+          <div className={styles.ledger}>
+            <div className={styles.ledgerSection}>
+              <div className={styles.ledgerSectionWallet}>
                 {ledgerAddressesState.map((wallet, index) => {
                   return (
                     <div
                       className={
                         indexOfLedgerAddressSelected === index
-                          ? "loginModal-ledgerModal-section-wallet-section ledgerAddressSelected"
-                          : "loginModal-ledgerModal-section-wallet-section"
+                          ? `${styles.ledgerSectionWalletSection} ${styles.ledgerAddressSelected}`
+                          : `${styles.ledgerSectionWalletSection}`
                       }
                       key={uuidv4()}
                       onClick={() => onSelectLedgerWallet(index)}
                     >
-                      <div className="loginModal-ledgerModal-section-wallet-index">
+                      <div className={styles.ledgerSectionWalletIndex}>
                         <p>{index + 1}</p>
                       </div>
-                      <div className="loginModal-ledgerModal-section-wallet-content">
-                        <div className="loginModal-ledgerModal-section-wallet-address">
+                      <div className={styles.ledgerSectionWalletContent}>
+                        <div className={styles.ledgerSectionWalletAddress}>
                           <p>{wallet.icxAddress}</p>
                         </div>
-                        <div className="loginModal-ledgerModal-section-wallet-balance">
+                        <div className={styles.ledgerSectionWalletBalance}>
                           {walletsIcxBalance == null ? (
                             <p>Balance: -.- ICX</p>
                           ) : (
@@ -328,18 +328,18 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
                   );
                 })}
               </div>
-              <div className="loginModal-ledgerModal-section-container-btn">
+              <div className={styles.ledgerSectionContainerBtn}>
                 <button onClick={handleLedgerWalletCancel}>Cancel</button>
                 <button onClick={handleLedgerWalletSelect}>Select</button>
               </div>
             </div>
           </div>
         ) : (
-          <div className="loginModal-ledgerModal">
-            <div className="loginModal-ledgerModal-section">
+          <div className={styles.ledger}>
+            <div className={styles.ledgerSection}>
               <img
-                src={CancelLogo}
-                className="loginModal-ledgerModal-logo"
+                src="/images/cancel-logo.png"
+                className={styles.ledgerLogo}
                 alt="icon logo"
               />
               <p>
