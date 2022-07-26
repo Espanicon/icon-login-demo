@@ -1,8 +1,8 @@
 {
-  "name": "icon-login-react-component",
+  "name": "icon-login",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://fidelve.github.io/ICON-login-react-component",
+  "homepage": "https://espanicon.github.io/ICON-Login/",
   "dependencies": {
     "@fontsource/lato": "^4.5.8",
     "@ledgerhq/hw-transport-webhid": "^6.27.1",
