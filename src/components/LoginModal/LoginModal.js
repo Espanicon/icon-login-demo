@@ -125,6 +125,12 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
     onRequestClose();
   }
 
+  function handleLoginData(newLoginData) {
+    // updates local loginData state and sends loginData to parent component
+    setLoginData(newLoginData);
+    onRetrieveData(newLoginData);
+  }
+
   function handleIconLogin() {
     // login with ICONex or Hana wallets
     window.dispatchEvent(
@@ -195,9 +201,11 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
     let newLoginData = loginData;
     newLoginData.methodUsed = LOGIN_METHODS.ledger;
     newLoginData.successfulLogin = true;
-    setLoginData(newLoginData);
 
-    onRetrieveData(loginData);
+    // update loginData on local state and send data to parent component
+    handleLoginData(newLoginData);
+
+    // close modal
     closeLedgerModal();
     closeModal();
   }
@@ -235,8 +243,8 @@ function LoginModal({ onRequestClose, onRetrieveData, isOpen, ...props }) {
       }
 
       // send data to parent component
-      setLoginData(localLoginData);
-      onRetrieveData(localLoginData);
+      handleLoginData(localLoginData);
+
       // close LoginModal
       closeModal();
     }
