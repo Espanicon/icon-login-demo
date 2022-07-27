@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import LoginModal from "./components/LoginModal/LoginModal.js";
-import utils from "./components/LoginModal/utils/utils";
+import { LoginModal, utils } from "./components/index";
 import "./App.css";
 import IconLogo from "./icon-logo.png";
 
