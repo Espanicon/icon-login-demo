@@ -1,4 +1,2 @@
-import LoginModal from "./LoginModal/LoginModal";
-import utils from "./LoginModal/utils/utils";
-
-export default foo = { LoginModal, utils };
+export { default as LoginModal } from "./LoginModal/LoginModal";
+export { default as utils } from "./LoginModal/utils/utils";

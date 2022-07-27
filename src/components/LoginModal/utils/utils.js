@@ -200,7 +200,8 @@ export function validateLocalData(newData) {
   validationResult = validationResponse(true);
   return validationResult;
 }
-export default {
+
+const utils = {
   getLocalKey,
   getLoginMethods,
   getBlankLogin,
@@ -210,3 +211,5 @@ export default {
   saveDataToLocal,
   validateLocalData
 };
+
+export default utils;
