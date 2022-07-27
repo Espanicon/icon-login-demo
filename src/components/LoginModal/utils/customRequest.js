@@ -38,9 +38,9 @@ async function httpx(params, data = false, runSecured = true) {
         rawData += chunk;
       });
 
-      for (let item in res.headers) {
+      // for (let item in res.headers) {
         // console.log(item + ": " + res.headers[item]);
-      }
+      // }
 
       // when request completed, pass the data to the 'resolve' callback
       res.on("end", () => {
@@ -69,7 +69,7 @@ async function httpx(params, data = false, runSecured = true) {
       console.log("error running query, passing error to callback reject");
       reject(err);
     });
-    if (data != false) {
+    if (data !== false) {
       // If data param is passed into function we write the data
       query.write(data);
     }
@@ -82,7 +82,7 @@ async function httpx(params, data = false, runSecured = true) {
   } catch (err) {
     console.log("error while running promisifiedQuery");
     console.log(err);
-    throw "error connecting to node";
+    throw new Error("error connecting to node")
   }
 }
 

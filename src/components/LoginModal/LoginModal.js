@@ -17,12 +17,6 @@ import iconImg from "./icon-logo.png";
 import ledgerImg from "./ledger-logo.png";
 
 // variables
-//
-const IMG_HEIGHT = 48;
-const IMG_WIDTH = IMG_HEIGHT;
-// testing data
-// import mockData from "../../../local_dev_files/mockData.js";
-// const MOCK_DATA = mockData();
 
 // for accesibility purposes
 Modal.setAppElement("body");

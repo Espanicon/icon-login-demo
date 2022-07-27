@@ -17,9 +17,9 @@ function hexToDecimal(hex) {
   return parseInt(hex, 16);
 }
 
-function decimalToHex(number) {
-  return "0x" + number.toString(16);
-}
+// function decimalToHex(number) {
+//   return "0x" + number.toString(16);
+// }
 
 function fromHexInLoop(loopInHex) {
   let loopInBase2 = hexToDecimal(loopInHex);
