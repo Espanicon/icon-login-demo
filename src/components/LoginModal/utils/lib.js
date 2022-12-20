@@ -1,7 +1,8 @@
 // lib.js
 //
 // Imports
-const customRequest = require("./customRequest");
+// const customRequest = require("./customRequest");
+const customFetch = require("./customFetch");
 const SCORES = require("./scores");
 
 // General Functions
@@ -37,9 +38,9 @@ async function getIcxBalance(address, decimals = 2) {
     }
   });
 
-  const request = await customRequest(SCORES.apiRoutes.v3, JSONRPCObject);
+  const request = await customFetch(SCORES.apiRoutes.v3, JSONRPCObject);
   if (request == null) {
-    // Error was raised and handled inside customRequest, the returned value
+    // Error was raised and handled inside customFetch, the returned value
     // is null. Here we continue returning null and let the code logic
     // after this handle the null values in the most appropiate way depending
     // on the code logic
